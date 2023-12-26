@@ -1,0 +1,174 @@
+[
+  {
+    "anonymous": false,
+    "inputs": [
+      {
+        "indexed": true,
+        "internalType": "address",
+        "name": "idoAddress",
+        "type": "address"
+      },
+      {
+        "indexed": true,
+        "internalType": "address",
+        "name": "idoOwner",
+        "type": "address"
+      }
+    ],
+    "name": "NewIDOCreated",
+    "type": "event"
+  },
+  {
+    "anonymous": false,
+    "inputs": [
+      {
+        "indexed": true,
+        "internalType": "address",
+        "name": "previousOwner",
+        "type": "address"
+      },
+      {
+        "indexed": true,
+        "internalType": "address",
+        "name": "newOwner",
+        "type": "address"
+      }
+    ],
+    "name": "OwnershipTransferred",
+    "type": "event"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "uint256",
+        "name": "",
+        "type": "uint256"
+      }
+    ],
+    "name": "allIdos",
+    "outputs": [
+      {
+        "internalType": "address",
+        "name": "",
+        "type": "address"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "address",
+        "name": "idoOwner",
+        "type": "address"
+      },
+      {
+        "internalType": "uint256",
+        "name": "tokenTotalSupply",
+        "type": "uint256"
+      },
+      {
+        "internalType": "uint256",
+        "name": "idoTokenPercent",
+        "type": "uint256"
+      },
+      {
+        "internalType": "uint256",
+        "name": "minimumMemeTokens",
+        "type": "uint256"
+      },
+      {
+        "internalType": "uint256",
+        "name": "minMemeTokenToParticipate",
+        "type": "uint256"
+      },
+      {
+        "internalType": "address",
+        "name": "idoToken",
+        "type": "address"
+      },
+      {
+        "internalType": "address",
+        "name": "memeToken",
+        "type": "address"
+      },
+      {
+        "internalType": "uint256",
+        "name": "idoStartTime",
+        "type": "uint256"
+      },
+      {
+        "internalType": "uint256",
+        "name": "idoBFATime",
+        "type": "uint256"
+      },
+      {
+        "internalType": "uint256",
+        "name": "idoEndTime",
+        "type": "uint256"
+      },
+      {
+        "internalType": "uint256",
+        "name": "claimableTime",
+        "type": "uint256"
+      }
+    ],
+    "name": "createIDO",
+    "outputs": [],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "address",
+        "name": "_account",
+        "type": "address"
+      }
+    ],
+    "name": "getIdos",
+    "outputs": [
+      {
+        "internalType": "address[]",
+        "name": "",
+        "type": "address[]"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [],
+    "name": "owner",
+    "outputs": [
+      {
+        "internalType": "address",
+        "name": "",
+        "type": "address"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [],
+    "name": "renounceOwnership",
+    "outputs": [],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "address",
+        "name": "newOwner",
+        "type": "address"
+      }
+    ],
+    "name": "transferOwnership",
+    "outputs": [],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  }
+]

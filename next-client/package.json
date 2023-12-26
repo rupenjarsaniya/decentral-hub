@@ -1,0 +1,36 @@
+{
+  "name": "next-client",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "lint": "next lint"
+  },
+  "dependencies": {
+    "react": "^18",
+    "react-dom": "^18",
+    "next": "14.0.4",
+    "@phosphor-icons/react": "^2.0.13",
+    "axios": "^1.6.2",
+    "clsx": "^2.0.0",
+    "formik": "^2.4.5",
+    "js-cookie": "^3.0.5",
+    "jsonwebtoken": "^9.0.2",
+    "lottie-react": "^2.4.0",
+    "moment": "^2.29.4",
+    "mongoose": "^7.6.2",
+    "react-notifywave": "^1.0.1",
+    "react-query": "^3.39.3",
+    "sass": "^1.69.3",
+    "sass-loader": "^13.3.2",
+    "web3": "^4.2.2",
+    "yup": "^1.3.2",
+    "zustand": "^4.4.4"
+  },
+  "devDependencies": {
+    "eslint": "^8",
+    "eslint-config-next": "14.0.4"
+  }
+}

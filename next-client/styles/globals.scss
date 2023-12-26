@@ -1,0 +1,45 @@
+@import url("https://fonts.googleapis.com/css2?family=Young+Serif&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Gabarito:wght@400;500;600;700;800;900&display=swap");
+
+* {
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+}
+
+html,
+body {
+  max-width: 100vw;
+  overflow-x: hidden;
+  min-height: 100vh;
+}
+
+:root {
+  --background: #0d1116;
+  --primary-dark: #161b22;
+  --color: #c9d1d9;
+  --gray: #8b949e;
+  --border: #30363d;
+  --primary: #800000;
+}
+
+body {
+  background-color: var(--background);
+  color: var(--color);
+  font-family: "Gabarito", sans-serif;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+input[type="number"] {
+  -moz-appearance: textfield;
+}

@@ -1,0 +1,81 @@
+.root {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+  height: 100%;
+
+  &__title {
+    font-size: 1.6rem;
+    font-family: "Young Serif", serif;
+    text-transform: uppercase;
+    letter-spacing: 0.1rem;
+    color: var(--color);
+  }
+
+  &__navs {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 0.1rem;
+
+    &_nav {
+      display: flex;
+      align-items: center;
+      gap: 0.4rem;
+      cursor: pointer;
+      border-radius: 10rem;
+      padding: 1rem;
+
+      & svg {
+        font-size: 1.6rem;
+      }
+
+      &:hover {
+        background: var(--primary-dark);
+      }
+
+      &_active {
+        font-weight: 600;
+      }
+    }
+  }
+
+  &__profile {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    cursor: pointer;
+    background: var(--primary-dark);
+    padding: 1rem;
+    border-radius: 10rem;
+
+    &_avatar {
+      width: 3rem;
+      background: var(--primary-dark);
+      border-radius: 50%;
+      overflow: hidden;
+
+      img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        border-radius: 50%;
+      }
+    }
+
+    &_info {
+      display: flex;
+      flex-direction: column;
+      gap: 0.2rem;
+
+      &_name {
+        font-weight: 600;
+      }
+
+      &_address {
+        font-size: 0.8rem;
+        color: var(--gray);
+      }
+    }
+  }
+}

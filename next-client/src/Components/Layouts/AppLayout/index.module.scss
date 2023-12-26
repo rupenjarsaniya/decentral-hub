@@ -1,0 +1,22 @@
+.root {
+  display: flex;
+  max-height: 100vh;
+  height: 100vh;
+  padding: 1.2rem;
+  gap: 1.2rem;
+  overflow: hidden;
+}
+
+.sidebar {
+  width: 18rem;
+}
+
+.children {
+  flex: 1;
+  overflow: auto;
+}
+
+.underline {
+  background: var(--border);
+  width: 1px;
+}
