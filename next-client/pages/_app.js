@@ -2,11 +2,8 @@ import "@/styles/globals.scss";
 import Head from "next/head";
 import { IdoProvider } from "@/src/context/IdoContext";
 import { BootstrapApp } from "@/src/Components/App/BootstrapApp";
-import { QueryClient, QueryClientProvider } from "react-query";
 
 export default function App({ Component, pageProps }) {
-  const queryClient = new QueryClient();
-
   return (
     <>
       <Head>
@@ -15,11 +12,9 @@ export default function App({ Component, pageProps }) {
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <QueryClientProvider client={queryClient}>
-        <IdoProvider>
-          <BootstrapApp Component={Component} pageProps={pageProps} />
-        </IdoProvider>
-      </QueryClientProvider>
+      <IdoProvider>
+        <BootstrapApp Component={Component} pageProps={pageProps} />
+      </IdoProvider>
     </>
   );
 }

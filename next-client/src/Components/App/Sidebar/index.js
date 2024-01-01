@@ -54,7 +54,7 @@ export const Sidebar = () => {
 
   return (
     <div className={s.root}>
-      <div className={s.root__title}>IDO Dapp</div>
+      <div className={s.root__title}>Decentral Hub</div>
 
       <ul className={s.root__navs}>
         <li

@@ -4,6 +4,7 @@ import { useRouter } from "next/router";
 import { useMemeTokenGetQuery } from "@/src/hooks/query";
 import { Card } from "@/src/Components/App/Card";
 import s from "./index.module.scss";
+import { Button } from "@/src/Components/App/Button";
 
 function customTruncate(number, decimals) {
   const multiplier = Math.pow(10, decimals);
@@ -87,24 +88,20 @@ export default function Page() {
                 }
                 actionBar={
                   <>
-                    <button
-                      className={s.cardActionBtn}
+                    <Button
+                      text={"Sell"}
                       disabled={!item.is_active}
                       onClick={() => {
                         router.push(`/memetokens/${item._id}`);
                       }}
-                    >
-                      Sell
-                    </button>
-                    <button
-                      className={s.cardActionBtn}
+                    />
+                    <Button
+                      text={"Buy"}
                       disabled={!item.is_active}
                       onClick={() => {
                         router.push(`/memetokens/${item._id}`);
                       }}
-                    >
-                      Buy
-                    </button>
+                    />
                   </>
                 }
               />

@@ -8,6 +8,7 @@ import { IdoContext } from "@/src/context/IdoContext";
 import { pinFileToIPFS, pinJSONToIPFS } from "@/src/utils/client/pinata";
 import { useToken721CreateQuery } from "@/src/hooks/query";
 import * as Yup from "yup";
+import { Button } from "@/src/Components/App/Button";
 
 const validationSchema = Yup.object({
   name: Yup.string().required("Name is required"),
@@ -92,7 +93,7 @@ export default function Page() {
           await onSubmit(values, resetForm);
         }}
       >
-        {({ isValid, dirty, setFieldValue, errors }) => (
+        {({ isValid, dirty, setFieldValue, errors, isSubmitting }) => (
           <Form className={s.root__form}>
             <label htmlFor="name" className={s.root__form_label}>
               Name
@@ -142,15 +143,13 @@ export default function Page() {
                 {errors.file ? errors.file : ""}
               </div>
             </div>
-            <button
+            <Button
               type="submit"
-              className={clsx(s.root__form_button, {
-                [s.root__form_button_disabled]: !isValid,
-              })}
+              text="submit"
+              classes={s.root__form_button}
               disabled={!isValid || !dirty}
-            >
-              Submit
-            </button>
+              isLoading={isSubmitting}
+            />
           </Form>
         )}
       </Formik>

@@ -1,16 +1,11 @@
 import Config from "@/src/config";
 import jwt from "jsonwebtoken";
+import { parse } from "cookie";
 
 export function getAuthToken(req) {
-  const cookieHeader = req.headers.cookie;
-  if (cookieHeader) {
-    const tokenCookie = cookieHeader
-      .split(";")
-      .find((cookie) => cookie.trim().startsWith("token="));
-    if (tokenCookie) {
-      const tokenValue = tokenCookie.split("=")[1].trim();
-      return tokenValue;
-    }
+  const cookies = parse(req.headers.cookie);
+  if (cookies.token) {
+    return cookies.token;
   }
   return null;
 }

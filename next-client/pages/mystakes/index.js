@@ -6,6 +6,7 @@ import s from "./index.module.scss";
 import { useRouter } from "next/router";
 import { useStakeGetQuery } from "@/src/hooks/query";
 import { useMemo } from "react";
+import { Button } from "@/src/Components/App/Button";
 
 export default function Page() {
   const router = useRouter();
@@ -29,14 +30,16 @@ export default function Page() {
       <p className={s.root__description}>
         Lorem ipsum, dolor sit amet consectetur adipisicing elit. Facere, eaque?
       </p>
-
-      <button
-        className={s.root__button}
+      <Button
+        classes={s.root__button}
         onClick={() => router.push("/createStake")}
-      >
-        <Plus />
-        Create Stake
-      </button>
+        text={
+          <>
+            <Plus />
+            Create Stake
+          </>
+        }
+      />
 
       <div className={s.root__cards}>
         {isLoading ? (
@@ -82,16 +85,10 @@ export default function Page() {
                 </>
               }
               actionBar={
-                <>
-                  <button
-                    className={s.cardActionBtn}
-                    onClick={() => {
-                      router.push(`/stake/${item._id}`);
-                    }}
-                  >
-                    Detail
-                  </button>
-                </>
+                <Button
+                  onClick={() => router.push(`/stake/${item._id}`)}
+                  text="Detail"
+                />
               }
             />
           ))

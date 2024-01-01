@@ -17,12 +17,16 @@ export function BootstrapApp({ Component, pageProps }) {
   useEffect(() => {
     if (isAuthLoading) return;
 
-    if (walletAddress === "") {
+    if (isAuthenticated && !walletAddress) {
       router.push("/login");
-    } else if (walletAddress !== "") {
+    } else if (!isAuthenticated && walletAddress) {
       handleLogin();
     } else {
-      router.push(router.pathname);
+      if (router.pathname === "/") {
+        router.push("/dashboard");
+      } else {
+        router.push(router.pathname);
+      }
     }
   }, [isAuthLoading, isAuthenticated, walletAddress]);
 
@@ -30,7 +34,8 @@ export function BootstrapApp({ Component, pageProps }) {
 
   return (
     <>
-      {walletAddress === "" || !isAuthenticated ? (
+      {(!walletAddress || !isAuthenticated) &&
+      (router.pathname === "/" || router.pathname === "/login") ? (
         <Component {...pageProps} />
       ) : (
         <AppLayout>

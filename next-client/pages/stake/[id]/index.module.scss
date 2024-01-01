@@ -98,33 +98,9 @@
       }
 
       &_btn {
-        background: rgb(128, 0, 0);
-        background: linear-gradient(
-          90deg,
-          rgba(128, 0, 0, 1) 0%,
-          rgba(128, 0, 0, 0.34079569327731096) 100%
-        );
-        color: var(--color);
-        padding: 1.2rem 0.5rem;
-        border: none;
-        outline: none;
-        border-radius: 0.5rem;
-        cursor: pointer;
-        text-transform: uppercase;
+        padding-block: 1.2rem !important;
         font-size: 1rem;
-        font-weight: 900;
-        opacity: 0.8;
         letter-spacing: 1px;
-
-        &:hover {
-          opacity: 1;
-        }
-
-        &:disabled {
-          opacity: 0.5;
-          cursor: not-allowed;
-          background: var(--background);
-        }
       }
 
       &_liveinfo {
@@ -211,35 +187,6 @@
     align-items: center;
     justify-content: space-between;
     gap: 0.2rem;
-  }
-}
-
-.cardActionBtn {
-  flex: 1;
-  background: rgb(128, 0, 0);
-  background: linear-gradient(
-    90deg,
-    rgba(128, 0, 0, 1) 0%,
-    rgba(128, 0, 0, 0.34079569327731096) 100%
-  );
-  color: var(--color);
-  padding: 0.5rem;
-  border: none;
-  outline: none;
-  border-radius: 0.5rem;
-  cursor: pointer;
-  text-transform: uppercase;
-  font-weight: 900;
-  opacity: 0.8;
-
-  &:hover {
-    opacity: 1;
-  }
-
-  &:disabled {
-    opacity: 0.5;
-    cursor: not-allowed;
-    background: var(--background);
   }
 }
 

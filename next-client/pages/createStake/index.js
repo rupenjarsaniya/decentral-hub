@@ -7,6 +7,7 @@ import { useContext } from "react";
 import { IdoContext } from "@/src/context/IdoContext";
 import { useStakeCreateQuery } from "@/src/hooks/query";
 import * as Yup from "yup";
+import { Button } from "@/src/Components/App/Button";
 
 const validationSchema = Yup.object({
   tokenAddress: Yup.string().required("Token adress is required"),
@@ -80,7 +81,7 @@ export default function Page() {
           await onSubmit(values, resetForm);
         }}
       >
-        {({ isValid, dirty }) => (
+        {({ isValid, dirty, isSubmitting }) => (
           <Form className={s.root__form}>
             <label htmlFor="tokenAddress" className={s.root__form_label}>
               Token Address
@@ -127,15 +128,13 @@ export default function Page() {
                 <ErrorMessage name="interestRate" />
               </div>
             </div>
-            <button
+            <Button
               type="submit"
-              className={clsx(s.root__form_button, {
-                [s.root__form_button_disabled]: !isValid,
-              })}
+              text={"Submit"}
+              classes={s.root__form_button}
               disabled={!isValid || !dirty}
-            >
-              Submit
-            </button>
+              isLoading={isSubmitting}
+            />
           </Form>
         )}
       </Formik>

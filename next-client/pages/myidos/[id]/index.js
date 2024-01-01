@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useContext, useMemo } from "react";
+import React, { useContext, useMemo, useState } from "react";
 import { useRouter } from "next/router";
 import s from "./index.module.scss";
 import clsx from "clsx";
@@ -14,6 +14,7 @@ import web3 from "web3";
 import { CountDown } from "@/src/Components/App/CountDown";
 import { ErrorMessage, Field, Form, Formik } from "formik";
 import * as Yup from "yup";
+import { Button } from "@/src/Components/App/Button";
 
 const validationSchema = Yup.object({
   tokenAmount: Yup.number()
@@ -25,7 +26,7 @@ export default function Page() {
   const {
     query: { id },
   } = useRouter();
-  const { data, isLoading, refetch } = useIdoGetQuery(id);
+  const { data, isLoading: isDataLoading, refetch } = useIdoGetQuery(id);
   const { mutateAsync: updateIdoAsync } = useIdoUpdateQuery(id);
   const {
     walletAddress,
@@ -33,11 +34,14 @@ export default function Page() {
     getERC20TokenContract,
     getMemeTokenContract,
   } = useContext(IdoContext);
+  const [isLoading, setIsLoading] = useState(false);
 
   const idoData = useMemo(() => data?.data, [data]);
 
   const startIdo = async () => {
     try {
+      setIsLoading(true);
+
       if (moment() < moment(idoData.start_time)) {
         return;
         //  notify(
@@ -79,11 +83,15 @@ export default function Page() {
     } catch (error) {
       console.log(error);
       // notify("Something went wrong", "error", 3000, "contained");
+    } finally {
+      setIsLoading(false);
     }
   };
 
   const participate = async (amount) => {
     try {
+      setIsLoading(true);
+
       const contract = getIdoContract(idoData.ido_address);
       const memeTokenContract = getMemeTokenContract();
 
@@ -120,11 +128,15 @@ export default function Page() {
     } catch (error) {
       console.log(error);
       // notify("Something went wrong", "error", 3000, "contained");
+    } finally {
+      setIsLoading(false);
     }
   };
 
   const cancelIdo = async () => {
     try {
+      setIsLoading(true);
+
       const contract = getIdoContract(idoData.ido_address);
 
       const gas = await contract.methods
@@ -153,11 +165,15 @@ export default function Page() {
     } catch (error) {
       console.log(error);
       // notify("Something went wrong", "error", 3000, "contained");
+    } finally {
+      setIsLoading(false);
     }
   };
 
   const endIDO = async () => {
     try {
+      setIsLoading(true);
+
       if (moment() < moment(idoData.end_time)) {
         return;
         // notify(
@@ -184,11 +200,15 @@ export default function Page() {
     } catch (error) {
       console.log(error);
       // notify("Something went wrong", "error", 3000, "contained");
+    } finally {
+      setIsLoading(false);
     }
   };
 
   const cliamableIDO = async () => {
     try {
+      setIsLoading(true);
+
       if (moment() < moment(idoData.claimable_time)) {
         return;
         // notify(
@@ -221,11 +241,15 @@ export default function Page() {
     } catch (error) {
       console.log(error);
       // notify("Something went wrong", "error", 3000, "contained");
+    } finally {
+      setIsLoading(false);
     }
   };
 
   const claimIdoTokens = async () => {
     try {
+      setIsLoading(true);
+
       const contract = getIdoContract(idoData.ido_address);
 
       const gas = await contract.methods.claimIDOToken().estimateGas({
@@ -245,11 +269,15 @@ export default function Page() {
     } catch (error) {
       console.log(error);
       // notify("Something went wrong", "error", 3000, "contained");
+    } finally {
+      setIsLoading(false);
     }
   };
 
   const withdraw = async () => {
     try {
+      setIsLoading(true);
+
       const contract = getIdoContract(idoData.ido_address);
 
       const gas = await contract.methods.withdraw().estimateGas({
@@ -269,11 +297,15 @@ export default function Page() {
     } catch (error) {
       console.log(error);
       // notify("Something went wrong", "error", 3000, "contained");
+    } finally {
+      setIsLoading(false);
     }
   };
 
   const approveWithdraw = async () => {
     try {
+      setIsLoading(true);
+
       const memeTokenContract = getMemeTokenContract();
 
       const gas = await memeTokenContract.methods
@@ -300,10 +332,12 @@ export default function Page() {
     } catch (error) {
       console.log(error);
       // notify("Something went wrong", "error", 3000, "contained");
+    } finally {
+      setIsLoading(false);
     }
   };
 
-  if (isLoading) return null;
+  if (isDataLoading) return null;
 
   return (
     <div className={s.root}>
@@ -450,71 +484,71 @@ export default function Page() {
                   IDO has been cancelled by the owner or IDO not successful, You
                   can withdraw your meme tokens from here!
                 </div>
-                <button
-                  className={s.root__body_right_btn}
-                  onClick={() => withdraw()}
-                >
-                  Withdraw MemeTokens
-                </button>
+                <Button
+                  onClick={withdraw}
+                  text={"Withdraw MemeTokens"}
+                  classes={s.root__body_right_btn}
+                  isLoading={isLoading}
+                />
               </>
             ) : (
-              <button
-                className={s.root__body_right_btn}
-                onClick={() => approveWithdraw()}
-              >
-                Approve Withdraw
-              </button>
+              <Button
+                onClick={approveWithdraw}
+                text={"Approve Withdraw"}
+                classes={s.root__body_right_btn}
+                isLoading={isLoading}
+              />
             ))}
 
           {idoData.status !== "Cancelled" &&
             idoData.status !== "Claimable" &&
             walletAddress === idoData.owner_address && (
-              <button
-                className={s.root__body_right_btn}
-                onClick={() => cancelIdo()}
-              >
-                Cancel IDO
-              </button>
+              <Button
+                onClick={cancelIdo}
+                text={"Cancel IDO"}
+                classes={s.root__body_right_btn}
+                isLoading={isLoading}
+              />
             )}
 
           {idoData.status === "Started" &&
             walletAddress === idoData.owner_address && (
-              <button
-                className={s.root__body_right_btn}
-                onClick={() => endIDO()}
-              >
-                End IDO
-              </button>
+              <Button
+                onClick={endIDO}
+                text={"End IDO"}
+                classes={s.root__body_right_btn}
+                isLoading={isLoading}
+              />
             )}
 
           {idoData.status === "Ended" &&
             walletAddress === idoData.owner_address && (
-              <button
-                className={s.root__body_right_btn}
-                onClick={() => cliamableIDO()}
-              >
-                Claimable
-              </button>
+              <Button
+                onClick={cliamableIDO}
+                text={"Claimable"}
+                classes={s.root__body_right_btn}
+                isLoading={isLoading}
+              />
             )}
 
           {idoData.status === "Not Started" &&
             walletAddress === idoData.owner_address && (
-              <button
-                className={s.root__body_right_btn}
-                onClick={() => startIdo()}
-              >
-                Start IDO
-              </button>
+              <Button
+                onClick={startIdo}
+                text={"Start IDO"}
+                classes={s.root__body_right_btn}
+                isLoading={isLoading}
+              />
             )}
 
           {idoData.status === "Claimable" &&
             walletAddress !== idoData.owner_address && (
-              <button
-                className={s.root__body_right_btn}
-                onClick={() => claimIdoTokens()}
-              >
-                Claim IDO Tokens
-              </button>
+              <Button
+                onClick={claimIdoTokens}
+                text={"Claim IDO Tokens"}
+                classes={s.root__body_right_btn}
+                isLoading={isLoading}
+              />
             )}
 
           {idoData.status === "Started" &&
@@ -529,7 +563,7 @@ export default function Page() {
                   resetForm();
                 }}
               >
-                {({ isValid, dirty }) => (
+                {({ isValid, dirty, isSubmitting }) => (
                   <Form className={s.root__form}>
                     <div className={s.root__form_inputWrapper}>
                       <Field
@@ -543,13 +577,13 @@ export default function Page() {
                         <ErrorMessage name="tokenAmount" />
                       </div>
                     </div>
-                    <button
+                    <Button
                       type="submit"
-                      className={s.root__body_right_btn}
+                      text={"Participate"}
                       disabled={!isValid || !dirty}
-                    >
-                      Participate
-                    </button>
+                      classes={s.root__body_right_btn}
+                      isLoading={isSubmitting}
+                    />
                   </Form>
                 )}
               </Formik>

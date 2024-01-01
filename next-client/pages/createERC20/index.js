@@ -5,6 +5,7 @@ import { useContext } from "react";
 import { IdoContext } from "@/src/context/IdoContext";
 import { useTokenCreateQuery } from "@/src/hooks/query";
 import * as Yup from "yup";
+import { Button } from "@/src/Components/App/Button";
 
 const validationSchema = Yup.object({
   tokenName: Yup.string().required("Token Name is required"),
@@ -88,7 +89,7 @@ export default function Page() {
           resetForm();
         }}
       >
-        {({ isValid, dirty }) => (
+        {({ isValid, dirty, isSubmitting }) => (
           <Form className={s.root__form}>
             <label htmlFor="tokenName" className={s.root__form_label}>
               Token Name
@@ -150,15 +151,13 @@ export default function Page() {
                 <ErrorMessage name="maxSupply" />
               </div>
             </div>
-            <button
+            <Button
               type="submit"
-              className={clsx(s.root__form_button, {
-                [s.root__form_button_disabled]: !isValid,
-              })}
+              text="Submit"
+              classes={s.root__form_button}
               disabled={!isValid || !dirty}
-            >
-              Submit
-            </button>
+              isLoading={isSubmitting}
+            />
           </Form>
         )}
       </Formik>

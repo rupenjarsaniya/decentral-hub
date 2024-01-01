@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useContext, useState } from "react";
 import { useMemeTokenUpdateQuery } from "@/src/hooks/query";
 import { IdoContext } from "@/src/context/IdoContext";
 import web3 from "web3";
@@ -6,6 +6,7 @@ import s from "./index.module.scss";
 import { ErrorMessage, Field, Form, Formik } from "formik";
 import * as Yup from "yup";
 import clsx from "clsx";
+import { Button } from "../Button";
 
 const validationSchema = Yup.object({
   tokenAmount: Yup.number()
@@ -19,9 +20,12 @@ const MemeTokenForm = ({ memetoken }) => {
   const { mutateAsync: updateMemeTokenMutate } = useMemeTokenUpdateQuery(
     memetoken.data._id
   );
+  const [isLoading, setIsLoading] = useState(false);
 
   const handleBuy = async (tokenAmount, resetForm) => {
     try {
+      setIsLoading(true);
+
       if (eth) {
         const contract = getMemeTokenContract();
         const valueOfTokens = tokenAmount * memetoken.data.price;
@@ -60,11 +64,15 @@ const MemeTokenForm = ({ memetoken }) => {
       //   3000,
       //   "contained"
       // );
+    } finally {
+      setIsLoading(false);
     }
   };
 
   const handleSell = async (tokenAmount, resetForm) => {
     try {
+      setIsLoading(true);
+
       const contract = getMemeTokenContract();
 
       const receipt = await contract.methods
@@ -90,6 +98,8 @@ const MemeTokenForm = ({ memetoken }) => {
       //   3000,
       //   "contained"
       // );
+    } finally {
+      setIsLoading(false);
     }
   };
 
@@ -125,30 +135,26 @@ const MemeTokenForm = ({ memetoken }) => {
               </div>
             </div>
             <div className={s.root__form_buttonWrapper}>
-              <button
+              <Button
                 type="button"
-                className={clsx(s.root__form_button, {
-                  [s.root__form_button_disabled]: !isValid,
-                })}
+                text="Buy"
+                classes={s.root__form_button}
                 disabled={!isValid || !dirty}
                 onClick={() => {
                   handleBuy(values.tokenAmount, resetForm);
                 }}
-              >
-                Buy
-              </button>
-              <button
+                isLoading={isLoading}
+              />
+              <Button
                 type="button"
-                className={clsx(s.root__form_button, {
-                  [s.root__form_button_disabled]: !isValid,
-                })}
+                text="Sell"
+                classes={s.root__form_button}
                 disabled={!isValid || !dirty}
                 onClick={() => {
                   handleSell(values.tokenAmount, resetForm);
                 }}
-              >
-                Sell
-              </button>
+                isLoading={isLoading}
+              />
             </div>
           </Form>
         )}

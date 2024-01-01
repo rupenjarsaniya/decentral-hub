@@ -9,8 +9,8 @@ import { useMemo, useState } from "react";
 import Web3 from "web3";
 import { toBigInt } from "@/src/utils/client/formate";
 import Link from "next/link";
-import Cookies from "js-cookie";
 import { useRouter } from "next/router";
+import { Button } from "@/src/Components/App/Button";
 
 export default function Page() {
   const router = useRouter();
@@ -56,18 +56,16 @@ export default function Page() {
         Lorem ipsum, dolor sit amet consectetur adipisicing elit. Facere, eaque?
       </p>
       <div className={s.root__buttonWrapper}>
-        <button
-          className={s.root__button}
+        <Button
+          classes={s.root__button}
           onClick={() => router.push("/myidos")}
-        >
-          My IDOs
-        </button>
-        <button
-          className={s.root__button}
+          text="My IDOs"
+        />
+        <Button
+          classes={s.root__button}
           onClick={() => router.push("/mystakes")}
-        >
-          My Stakes{" "}
-        </button>
+          text="My Stakes"
+        />
       </div>
       <h2>ERC20 Tokens</h2>
       <div className={s.root__cards}>

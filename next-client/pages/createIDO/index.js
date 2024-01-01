@@ -9,6 +9,7 @@ import { useIdoCreateQuery } from "@/src/hooks/query";
 import moment from "moment";
 import web3 from "web3";
 import * as Yup from "yup";
+import { Button } from "@/src/Components/App/Button";
 
 const validationSchema = Yup.object({
   idoToken: Yup.string().required("IDO token adress is required"),
@@ -170,7 +171,7 @@ export default function Page() {
           await onSubmit(values, resetForm);
         }}
       >
-        {({ isValid, dirty }) => (
+        {({ isValid, dirty, isSubmitting }) => (
           <Form className={s.root__form}>
             <label htmlFor="idoToken" className={s.root__form_label}>
               IDO Token Address
@@ -306,15 +307,13 @@ export default function Page() {
                 <ErrorMessage name="idoClaimableTime" />
               </div>
             </div>
-            <button
+            <Button
               type="submit"
-              className={clsx(s.root__form_button, {
-                [s.root__form_button_disabled]: !isValid,
-              })}
+              text="Submit"
+              classes={s.root__form_button}
               disabled={!isValid || !dirty}
-            >
-              Submit
-            </button>
+              isLoading={isSubmitting}
+            />
           </Form>
         )}
       </Formik>

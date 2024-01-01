@@ -4,7 +4,6 @@ import Config from "@/src/config";
 import { getAuthTokenInfo } from "@/src/utils/server/auth";
 import jwt from "jsonwebtoken";
 import { Types } from "mongoose";
-import Cookies from "js-cookie";
 
 const POST = async (req, res) => {
   try {

@@ -10,6 +10,7 @@ import { useMemo } from "react";
 import moment from "moment";
 import { progress, toBigInt } from "@/src/utils/client/formate";
 import web3 from "web3";
+import { Button } from "@/src/Components/App/Button";
 
 export default function Page() {
   const router = useRouter();
@@ -32,15 +33,16 @@ export default function Page() {
       <p className={s.root__description}>
         Lorem ipsum, dolor sit amet consectetur adipisicing elit. Facere, eaque?
       </p>
-
-      <button
-        className={s.root__button}
+      <Button
+        classes={s.root__button}
         onClick={() => router.push("/createIDO")}
-      >
-        <Plus />
-        Create IDO
-      </button>
-
+        text={
+          <>
+            <Plus />
+            Create IDO
+          </>
+        }
+      />
       <div className={s.root__cards}>
         {isLoading ? (
           <div>Loading...</div>
@@ -107,12 +109,10 @@ export default function Page() {
                       />
                     )}
                   </div>
-                  <button
-                    className={s.cardActionBtn}
+                  <Button
                     onClick={() => router.push(`/myidos/${item._id}`)}
-                  >
-                    View
-                  </button>
+                    text="View"
+                  />
                 </>
               }
             />

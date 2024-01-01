@@ -7,6 +7,7 @@ import { progress, toBigInt } from "@/src/utils/client/formate";
 import { CountDown } from "@/src/Components/App/CountDown";
 import moment from "moment";
 import web3 from "web3";
+import { Button } from "@/src/Components/App/Button";
 
 export default function Page() {
   const router = useRouter();
@@ -67,9 +68,9 @@ export default function Page() {
                       {item.ido_tokens_left == 0
                         ? 0
                         : web3.utils.fromWei(
-                            toBigInt(item.ido_tokens_left),
-                            "ether"
-                          )}{" "}
+                          toBigInt(item.ido_tokens_left),
+                          "ether"
+                        )}{" "}
                       SH
                     </span>
                     <span>
@@ -97,12 +98,7 @@ export default function Page() {
                       />
                     )}
                   </div>
-                  <button
-                    className={s.cardActionBtn}
-                    onClick={() => router.push(`/myidos/${item._id}`)}
-                  >
-                    View
-                  </button>
+                  <Button onClick={() => router.push(`/myidos/${item._id}`)} text={"View"} />
                 </>
               }
             />
