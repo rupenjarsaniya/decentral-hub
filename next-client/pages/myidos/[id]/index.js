@@ -1,5 +1,3 @@
-"use client";
-
 import React, { useContext, useMemo, useState } from "react";
 import { useRouter } from "next/router";
 import s from "./index.module.scss";
@@ -15,6 +13,7 @@ import { CountDown } from "@/src/Components/App/CountDown";
 import { ErrorMessage, Field, Form, Formik } from "formik";
 import * as Yup from "yup";
 import { Button } from "@/src/Components/App/Button";
+import { toast } from "react-toastify";
 
 const validationSchema = Yup.object({
   tokenAmount: Yup.number()
@@ -43,13 +42,8 @@ export default function Page() {
       setIsLoading(true);
 
       if (moment() < moment(idoData.start_time)) {
+        toast.error("IDO Start time is not ended yet");
         return;
-        //  notify(
-        //   "IDO Start time is not ended yet",
-        //   "error",
-        //   1000,
-        //   "contained"
-        // );
       }
 
       const contract = getIdoContract(idoData.ido_address);
@@ -79,10 +73,10 @@ export default function Page() {
 
       await updateIdoAsync({ status: "Started" });
 
-      // notify("IDO Started", "success", 3000, "contained");
+      toast.success("IDO Started");
     } catch (error) {
       console.log(error);
-      // notify("Something went wrong", "error", 3000, "contained");
+      toast.error("Something went wrong, try after few seconds");
     } finally {
       setIsLoading(false);
     }
@@ -117,17 +111,12 @@ export default function Page() {
           Number(web3.utils.toWei(toBigInt(amount), "ether")),
       });
 
-      // notify(
-      //   "You have successfully participated in IDO",
-      //   "success",
-      //   3000,
-      //   "contained"
-      // );
+      toast.success("You have successfully participated in IDO");
 
       refetch();
     } catch (error) {
       console.log(error);
-      // notify("Something went wrong", "error", 3000, "contained");
+      toast.error("Something went wrong, try after few seconds");
     } finally {
       setIsLoading(false);
     }
@@ -159,12 +148,11 @@ export default function Page() {
         await updateIdoAsync({ status: "Cancelled", is_withdrawable: true });
       }
 
-      // notify("IDO Started", "success", 3000, "contained");
-
+      toast.success("IDO Started");
       refetch();
     } catch (error) {
       console.log(error);
-      // notify("Something went wrong", "error", 3000, "contained");
+      toast.error("Something went wrong, try after few seconds");
     } finally {
       setIsLoading(false);
     }
@@ -175,13 +163,8 @@ export default function Page() {
       setIsLoading(true);
 
       if (moment() < moment(idoData.end_time)) {
+        toast.error("IDO End time is not ended yet");
         return;
-        // notify(
-        //   "IDO End time is not ended yet",
-        //   "error",
-        //   1000,
-        //   "contained"
-        // );
       }
 
       const contract = getIdoContract(idoData.ido_address);
@@ -194,12 +177,11 @@ export default function Page() {
 
       await updateIdoAsync({ status: "Ended" });
 
-      // notify("IDO Ended", "success", 3000, "contained");
-
+      toast.success("IDO Ended");
       refetch();
     } catch (error) {
       console.log(error);
-      // notify("Something went wrong", "error", 3000, "contained");
+      toast.error("Something went wrong, try after few seconds");
     } finally {
       setIsLoading(false);
     }
@@ -210,13 +192,8 @@ export default function Page() {
       setIsLoading(true);
 
       if (moment() < moment(idoData.claimable_time)) {
+        toast.error("IDO Claimable time is not ended yet");
         return;
-        // notify(
-        //   "IDO Claimable time is not ended yet",
-        //   "error",
-        //   1000,
-        //   "contained"
-        // );
       }
 
       const contract = getIdoContract(idoData.ido_address);
@@ -234,13 +211,12 @@ export default function Page() {
 
         await updateIdoAsync({ status: "Claimable" });
 
-        // notify("IDO Claimable", "success", 3000, "contained");
-
+        toast.success("IDO Claimable");
         refetch();
       }
     } catch (error) {
       console.log(error);
-      // notify("Something went wrong", "error", 3000, "contained");
+      toast.error("Something went wrong");
     } finally {
       setIsLoading(false);
     }
@@ -263,12 +239,11 @@ export default function Page() {
 
       console.log("Transaction receipt", receipt);
 
-      // notify("IDO Tokens Claimed", "success", 3000, "contained");
-
+      toast.success("IDO Tokens Claimed");
       refetch();
     } catch (error) {
       console.log(error);
-      // notify("Something went wrong", "error", 3000, "contained");
+      toast.error("Something went wrong, try after few seconds");
     } finally {
       setIsLoading(false);
     }
@@ -291,12 +266,11 @@ export default function Page() {
 
       console.log("Transaction receipt", receipt);
 
-      // notify("Meme Tokens Claimed", "success", 3000, "contained");
-
+      toast.success("Meme Tokens Claimed");
       refetch();
     } catch (error) {
       console.log(error);
-      // notify("Something went wrong", "error", 3000, "contained");
+      toast.error("Something went wrong, try after few seconds");
     } finally {
       setIsLoading(false);
     }
@@ -326,12 +300,11 @@ export default function Page() {
 
       console.log("approveReceipt", approveReceipt);
 
-      // notify("Withdraw Approved", "success", 3000, "contained");
-
+      toast.success("Withdraw Approved");
       refetch();
     } catch (error) {
       console.log(error);
-      // notify("Something went wrong", "error", 3000, "contained");
+      toast.error("Something went wrong, try after few seconds");
     } finally {
       setIsLoading(false);
     }
@@ -393,12 +366,7 @@ export default function Page() {
                     className={s.grid__item_iconButton}
                     onClick={() => {
                       handleCopy(idoData.ido_token);
-                      // notify(
-                      //   "Copied to clipboard",
-                      //   "success",
-                      //   1000,
-                      //   "contained"
-                      // );
+                      toast.success("Copied to clipboard");
                     }}
                     role="button"
                   >
@@ -414,12 +382,7 @@ export default function Page() {
                     className={s.grid__item_iconButton}
                     onClick={() => {
                       handleCopy(idoData.meme_token);
-                      // notify(
-                      //   "Copied to clipboard",
-                      //   "success",
-                      //   1000,
-                      //   "contained"
-                      // );
+                      toast.success("Copied to clipboard");
                     }}
                     role="button"
                   >

@@ -1,6 +1,3 @@
-"use client";
-
-import clsx from "clsx";
 import s from "./index.module.scss";
 import { ErrorMessage, Field, Form, Formik } from "formik";
 import { useContext } from "react";
@@ -9,6 +6,7 @@ import { pinFileToIPFS, pinJSONToIPFS } from "@/src/utils/client/pinata";
 import { useToken721CreateQuery } from "@/src/hooks/query";
 import * as Yup from "yup";
 import { Button } from "@/src/Components/App/Button";
+import { toast } from "react-toastify";
 
 const validationSchema = Yup.object({
   name: Yup.string().required("Name is required"),
@@ -55,21 +53,15 @@ export default function Page() {
         token_id: Number(receipt.events.Transfer.returnValues.tokenId),
       });
 
-      notify(
-        res.message,
-        res.status === 201 ? "success" : "error",
-        3000,
-        "contained"
-      );
+      if (res.status === 201) {
+        toast.success(res.message);
+      } else {
+        toast.error(res.message);
+      }
 
       resetForm();
     } catch (error) {
-      notify(
-        "Something went wrong, try after few seconds",
-        "error",
-        3000,
-        "contained"
-      );
+      toast.error("Something went wrong, try after few seconds");
       console.log(error);
     }
   };

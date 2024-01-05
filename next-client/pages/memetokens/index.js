@@ -1,5 +1,3 @@
-"use client";
-
 import { useRouter } from "next/router";
 import { useMemeTokenGetQuery } from "@/src/hooks/query";
 import { Card } from "@/src/Components/App/Card";

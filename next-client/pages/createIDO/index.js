@@ -1,6 +1,3 @@
-"use client";
-
-import clsx from "clsx";
 import s from "./index.module.scss";
 import { ErrorMessage, Field, Form, Formik } from "formik";
 import { useContext } from "react";
@@ -10,6 +7,7 @@ import moment from "moment";
 import web3 from "web3";
 import * as Yup from "yup";
 import { Button } from "@/src/Components/App/Button";
+import { toast } from "react-toastify";
 
 const validationSchema = Yup.object({
   idoToken: Yup.string().required("IDO token adress is required"),
@@ -124,16 +122,10 @@ export default function Page() {
         is_withdrawable: false,
       });
 
-      // notify(res.message, "success", 3000, "contained");
-
+      toast.success(res.message);
       resetForm();
     } catch (error) {
-      // notify(
-      //   "Something went wrong, try after few seconds",
-      //   "error",
-      //   3000,
-      //   "contained"
-      // );
+      toast.error("Something went wrong, try after few seconds");
       console.log(error);
     }
   };

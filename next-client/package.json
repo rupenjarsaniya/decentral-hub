@@ -24,6 +24,7 @@
     "react-dom": "^18",
     "react-notifywave": "^1.0.1",
     "react-query": "^3.39.3",
+    "react-toastify": "^9.1.3",
     "sass": "^1.69.3",
     "sass-loader": "^13.3.2",
     "web3": "^4.2.2",

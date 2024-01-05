@@ -1,5 +1,3 @@
-"use client";
-
 import { Plus } from "@phosphor-icons/react";
 import { Card } from "@/src/Components/App/Card";
 import { CountDown } from "@/src/Components/App/CountDown";

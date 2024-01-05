@@ -5,8 +5,8 @@ import web3 from "web3";
 import s from "./index.module.scss";
 import { ErrorMessage, Field, Form, Formik } from "formik";
 import * as Yup from "yup";
-import clsx from "clsx";
 import { Button } from "../Button";
+import { toast } from "react-toastify";
 
 const validationSchema = Yup.object({
   tokenAmount: Yup.number()
@@ -52,18 +52,12 @@ const MemeTokenForm = ({ memetoken }) => {
             memetoken.data.available_tokens - Number(tokenAmount),
         });
 
-        // notify("Token bought successfully", "success", 3000, "contained");
-
+        toast.success("Token bought successfully");
         resetForm();
       }
     } catch (error) {
       console.log(error);
-      // notify(
-      //   "Something went wrong while buy token",
-      //   "error",
-      //   3000,
-      //   "contained"
-      // );
+      toast.error("Something went wrong while buy token");
     } finally {
       setIsLoading(false);
     }
@@ -87,17 +81,11 @@ const MemeTokenForm = ({ memetoken }) => {
         available_tokens: memetoken.data.available_tokens + Number(tokenAmount),
       });
 
-      // notify("Token sold successfully", "success", 3000, "contained");
-
+      toast.success("Token sold successfully");
       resetForm();
     } catch (error) {
       console.log(error);
-      // notify(
-      //   "Something went wrong while sell token",
-      //   "error",
-      //   3000,
-      //   "contained"
-      // );
+      toast.error("Something went wrong while sell token");
     } finally {
       setIsLoading(false);
     }

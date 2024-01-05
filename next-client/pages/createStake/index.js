@@ -1,6 +1,3 @@
-"use client";
-
-import clsx from "clsx";
 import s from "./index.module.scss";
 import { ErrorMessage, Field, Form, Formik } from "formik";
 import { useContext } from "react";
@@ -8,6 +5,7 @@ import { IdoContext } from "@/src/context/IdoContext";
 import { useStakeCreateQuery } from "@/src/hooks/query";
 import * as Yup from "yup";
 import { Button } from "@/src/Components/App/Button";
+import { toast } from "react-toastify";
 
 const validationSchema = Yup.object({
   tokenAddress: Yup.string().required("Token adress is required"),
@@ -48,16 +46,10 @@ export default function Page() {
         status: "Started",
       });
 
-      // notify(res.message, "success", 3000, "contained");
-
+      toast.success(res.message);
       resetForm();
     } catch (error) {
-      // notify(
-      //   "Something went wrong, try after few seconds",
-      //   "error",
-      //   3000,
-      //   "contained"
-      // );
+      toast.error("Something went wrong, try after few seconds");
       console.log(error);
     }
   };

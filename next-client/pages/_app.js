@@ -2,6 +2,7 @@ import "@/styles/globals.scss";
 import Head from "next/head";
 import { IdoProvider } from "@/src/context/IdoContext";
 import { BootstrapApp } from "@/src/Components/App/BootstrapApp";
+import { ToastContainer } from "react-toastify";
 
 export default function App({ Component, pageProps }) {
   return (
@@ -13,6 +14,18 @@ export default function App({ Component, pageProps }) {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <IdoProvider>
+        <ToastContainer
+          position="top-center"
+          autoClose={5000}
+          hideProgressBar={false}
+          newestOnTop={false}
+          closeOnClick
+          rtl={false}
+          pauseOnFocusLoss
+          draggable
+          pauseOnHover
+          theme="dark"
+        />
         <BootstrapApp Component={Component} pageProps={pageProps} />
       </IdoProvider>
     </>

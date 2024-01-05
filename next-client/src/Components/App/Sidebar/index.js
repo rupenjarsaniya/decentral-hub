@@ -1,5 +1,3 @@
-"use client";
-
 import React, { useContext } from "react";
 import s from "./index.module.scss";
 import Image from "next/image";
@@ -8,11 +6,10 @@ import {
   House,
   PokerChip,
   SmileyWink,
-  Fingerprint,
   PiggyBank,
   PottedPlant,
-  Key,
   ImageSquare,
+  PlusCircle,
 } from "@phosphor-icons/react";
 import clsx from "clsx";
 import { useRouter } from "next/router";
@@ -35,15 +32,18 @@ export const Sidebar = () => {
         router.push("/createERC20");
         break;
       case 2:
-        router.push("/memetokens");
+        router.push("/createIDO");
         break;
       case 3:
-        router.push("/mintnft");
+        router.push("/memetokens");
         break;
       case 4:
-        router.push("/stake");
+        router.push("/mintnft");
         break;
       case 5:
+        router.push("/stake");
+        break;
+      case 6:
         router.push("/myassets");
         break;
       default:
@@ -81,8 +81,8 @@ export const Sidebar = () => {
           })}
           onClick={() => setActiveNav(2)}
         >
-          <SmileyWink />
-          Meme Tokens
+          <PlusCircle />
+          Create IDO
         </li>
         <li
           className={clsx(s.root__navs_nav, {
@@ -90,8 +90,8 @@ export const Sidebar = () => {
           })}
           onClick={() => setActiveNav(3)}
         >
-          <ImageSquare />
-          Mint NFT
+          <SmileyWink />
+          Meme Tokens
         </li>
         <li
           className={clsx(s.root__navs_nav, {
@@ -99,14 +99,23 @@ export const Sidebar = () => {
           })}
           onClick={() => setActiveNav(4)}
         >
-          <PottedPlant />
-          Stake
+          <ImageSquare />
+          Mint NFT
         </li>
         <li
           className={clsx(s.root__navs_nav, {
             [s.root__navs_nav_active]: active === 5,
           })}
           onClick={() => setActiveNav(5)}
+        >
+          <PottedPlant />
+          Stake
+        </li>
+        <li
+          className={clsx(s.root__navs_nav, {
+            [s.root__navs_nav_active]: active === 6,
+          })}
+          onClick={() => setActiveNav(6)}
         >
           <PiggyBank />
           My Assets

@@ -1,5 +1,3 @@
-"use client";
-
 import { createContext, useEffect, useState } from "react";
 import { useAuth } from "../hooks/useAuth";
 import { useRouter } from "next/router";

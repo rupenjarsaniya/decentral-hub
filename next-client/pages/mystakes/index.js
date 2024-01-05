@@ -1,5 +1,3 @@
-"use client";
-
 import { Percent, Plus, User } from "@phosphor-icons/react";
 import { Card } from "@/src/Components/App/Card";
 import s from "./index.module.scss";

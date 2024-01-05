@@ -1,4 +1,3 @@
-import clsx from "clsx";
 import s from "./index.module.scss";
 import { ErrorMessage, Field, Form, Formik } from "formik";
 import { useContext } from "react";
@@ -6,6 +5,7 @@ import { IdoContext } from "@/src/context/IdoContext";
 import { useTokenCreateQuery } from "@/src/hooks/query";
 import * as Yup from "yup";
 import { Button } from "@/src/Components/App/Button";
+import { toast } from "react-toastify";
 
 const validationSchema = Yup.object({
   tokenName: Yup.string().required("Token Name is required"),
@@ -56,14 +56,9 @@ export default function Page() {
         token_max_supply: values.maxSupply * Math.pow(10, 18),
       });
 
-      // notify(res.message, "success", 3000, "contained");
+      toast.success(res.message);
     } catch (error) {
-      // notify(
-      //   "Something went wrong, try after few seconds",
-      //   "error",
-      //   3000,
-      //   "contained"
-      // );
+      toast.error("Something went wrong, try after few seconds");
       console.log(error);
     }
   };

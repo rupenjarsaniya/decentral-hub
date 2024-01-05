@@ -1,5 +1,3 @@
-"use client";
-
 import s from "./index.module.scss";
 import { useToken721GetQuery, useTokenGetQuery } from "@/src/hooks/query";
 import { Card } from "@/src/Components/App/Card";
@@ -11,6 +9,7 @@ import { toBigInt } from "@/src/utils/client/formate";
 import Link from "next/link";
 import { useRouter } from "next/router";
 import { Button } from "@/src/Components/App/Button";
+import { toast } from "react-toastify";
 
 export default function Page() {
   const router = useRouter();
@@ -84,12 +83,7 @@ export default function Page() {
                       className={s.cardBody__address_iconButton}
                       onClick={() => {
                         handleCopy(item.token_address);
-                        // notify(
-                        //   "Copied to clipboard",
-                        //   "success",
-                        //   1000,
-                        //   "contained"
-                        // );
+                        toast.success("Copied to Clipboard");
                       }}
                       role="button"
                     >

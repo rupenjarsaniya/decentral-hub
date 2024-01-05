@@ -1,5 +1,3 @@
-"use client";
-
 import { useRouter } from "next/router";
 import React, { useContext, useMemo, useState } from "react";
 import { IdoContext } from "@/src/context/IdoContext";
@@ -21,6 +19,7 @@ import { formateAddress } from "@/src/utils/client/formate";
 import Web3 from "web3";
 import * as Yup from "yup";
 import { Button } from "@/src/Components/App/Button";
+import { toast } from "react-toastify";
 
 const validationSchema = Yup.object({
   amount: Yup.number()
@@ -74,17 +73,11 @@ export default function Page() {
         claimed: 0,
       });
 
-      // notify(res.message, "success", 3000, "contained");
-
+      toast.success(res.message);
       resetForm();
       stakingRefech();
     } catch (error) {
-      // notify(
-      //   "Something went wrong, try after few seconds",
-      //   "error",
-      //   3000,
-      //   "contained"
-      // );
+      toast.error("Something went wrong, try after few seconds");
       console.log(error);
     } finally {
       setIsLoading(false);
@@ -116,17 +109,11 @@ export default function Page() {
         id,
       });
 
-      // notify(res.message, "success", 3000, "contained");
-
+      toast.success(res.message);
       resetForm();
       stakingRefech();
     } catch (error) {
-      // notify(
-      //   "Something went wrong, try after few seconds",
-      //   "error",
-      //   3000,
-      //   "contained"
-      // );
+      toast.error("Something went wrong, try after few seconds");
       console.log(error);
     } finally {
       setIsLoading(false);
@@ -148,15 +135,10 @@ export default function Page() {
         status: "Ended",
       });
 
-      // notify("Staking ended successfully", "success", 3000, "contained");
+      toast.success("Staking ended successfully");
       refetch();
     } catch (error) {
-      // notify(
-      //   "Something went wrong, try after few seconds",
-      //   "error",
-      //   3000,
-      //   "contained"
-      // );
+      toast.error("Something went wrong, try after few seconds");
       console.log(error);
     } finally {
       setIsLoading(false);
@@ -178,15 +160,10 @@ export default function Page() {
         status: "Paused",
       });
 
-      // notify("Staking paused successfully", "success", 3000, "contained");
+      toast.success("Staking paused successfully");
       refetch();
     } catch (error) {
-      // notify(
-      //   "Something went wrong, try after few seconds",
-      //   "error",
-      //   3000,
-      //   "contained"
-      // );
+      toast.error("Something went wrong, try after few seconds");
       console.log(error);
     } finally {
       setIsLoading(false);
@@ -208,15 +185,10 @@ export default function Page() {
         status: "Started",
       });
 
-      // notify("Staking resumed successfully", "success", 3000, "contained");
+      toast.success("Staking resumed successfully");
       refetch();
     } catch (error) {
-      // notify(
-      //   "Something went wrong, try after few seconds",
-      //   "error",
-      //   3000,
-      //   "contained"
-      // );
+      toast.error("Something went wrong, try after few seconds");
       console.log(error);
     } finally {
       setIsLoading(false);
@@ -262,12 +234,7 @@ export default function Page() {
                     className={s.grid__item_iconButton}
                     onClick={() => {
                       handleCopy(idoData.ido_token);
-                      // notify(
-                      //   "Copied to clipboard",
-                      //   "success",
-                      //   1000,
-                      //   "contained"
-                      // );
+                      toast.success("Copied to clipboard");
                     }}
                     role="button"
                   >
