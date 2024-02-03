@@ -34,10 +34,7 @@ export default function Page() {
       const ipfsJsonHash = await pinJSONToIPFS(metadata, { name: values.name });
 
       const gas = await contract.methods
-        .safeMint(
-          "0xa6088d5fd844716c6A802b1CFB6ac560Aa883e6c",
-          `ipfs://${ipfsJsonHash}`
-        )
+        .safeMint(walletAddress, `ipfs://${ipfsJsonHash}`)
         .estimateGas({ from: walletAddress });
 
       const receipt = await contract.methods

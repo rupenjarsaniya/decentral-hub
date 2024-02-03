@@ -150,14 +150,10 @@ export default function Page() {
             <Card
               key={item._id}
               title={item.name}
+              image={item.uri}
               body={
                 <div className={s.cardBody}>
-                  <div
-                    className={s.cardBody__detail}
-                    style={{
-                      display: "flex",
-                    }}
-                  >
+                  <div className={s.cardBody__detail}>
                     <div className={s.cardBody__detail_image}>
                       <img src={item.uri} alt={item.uri} />
                     </div>

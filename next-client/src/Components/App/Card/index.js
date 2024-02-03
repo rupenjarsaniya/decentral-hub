@@ -7,7 +7,11 @@ export const Card = ({ image, title, status, body, actionBar }) => {
     <div className={s.root}>
       <div className={s.root__header}>
         <div className={s.root__header_left}>
-          <div className={s.root__header_left_image}></div>
+          {image && (
+            <div className={s.root__header_left_image}>
+              <img src={image} alt={title} />
+            </div>
+          )}
           <div className={s.root__header_left_name}>{title}</div>
         </div>
         {status && (

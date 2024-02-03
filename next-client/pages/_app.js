@@ -3,6 +3,7 @@ import Head from "next/head";
 import { IdoProvider } from "@/src/context/IdoContext";
 import { BootstrapApp } from "@/src/Components/App/BootstrapApp";
 import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 export default function App({ Component, pageProps }) {
   return (
